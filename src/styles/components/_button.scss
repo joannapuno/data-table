@@ -1,0 +1,8 @@
+@use '../shared/variables' as *;
+
+.sd-button {
+    &--neutral {
+        background-color: $neutral-100;
+        border-color: $neutral-100;
+    }
+}

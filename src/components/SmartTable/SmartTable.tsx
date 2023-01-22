@@ -1,92 +1,56 @@
-function SmartTable() {
-  // const [count, setCount] = useState(0)
+import { MouseEventHandler } from 'react';
+import '../../styles/components/smart-table.scss';
 
-  const columns = [
-    {
-      field: 'id',
-      headerName: 'ID',
-      width: 10
-    },
-    {
-      field: 'name',
-      headerName: 'Name',
-      width: 10
-    },
-    {
-      field: 'description',
-      headerName: 'Description',
-      width: 10
-    },
-  ] 
+interface StringMap { [key: string]: string | number }
 
-  const rows = [
-    {
-      id: 1,
-      name: 'Jem 1',
-      description: 'Lorem ipsum 1'
-    },
-    {
-      id: 2,
-      name: 'Jem 2',
-      description: 'Lorem ipsum 2'
-    },
-    {
-      id: 3,
-      name: 'Jem 3',
-      description: 'Lorem ipsum 3'
-    },
-    {
-      id: 4,
-      name: 'Jem 4',
-      description: 'Lorem ipsum 4'
-    },
-    {
-      id: 1,
-      name: 'Jem 1',
-      description: 'Lorem ipsum 5'
-    },
-  ]
+type Props = {
+  columns?: StringMap[],
+  rows?: StringMap[],
+  addColumn: MouseEventHandler,
+  addRow: MouseEventHandler
+}
 
-  const columnTds = columns.map((col) => {
+function SmartTable(props: Props) {
+  const getRowKeys = (row: StringMap):string[] => {
+    return Object.keys(row)
+  }
+
+  const headers = props.columns?.map((col, index) => {
     return (
-      <th key={col.field}>
+      <th key={index}>
         <div className="sd-table-header">
           {col.headerName}
         </div>
       </th>
     )
   })
-  const columnTrs = rows.map(( { id, name, description } ) => {
+
+  const rowCells = (row: StringMap) => {
+    return getRowKeys(row).map((field, index) => {
+      return (
+        <td key={index}>
+          <div className="sd-table-cell">{row[field]}</div>
+        </td>
+      )
+    })
+  }
+
+  const columnTrs = props.rows?.map((row, index) => {
     return (
-      <tr key={id}>
-        <td>
-          <div className="sd-table-cell">
-            {id}
-          </div>
-        </td>
-        <td>
-          <div className="sd-table-cell">
-            {name}
-          </div>
-        </td>
-        <td>
-          <div className="sd-table-cell">
-            {description}
-          </div>
-        </td>
-        
+      <tr key={index}>
+        {rowCells(row)}
       </tr>
     )
   })
 
+
+
   return (
     <div className="sd-table">
-      <div className="sd-table__options"></div>
-
       <table>
         <thead>
           <tr>
-            {columnTds}
+            {headers}
           </tr>
         </thead>
         <tbody>
@@ -94,8 +58,8 @@ function SmartTable() {
         </tbody>
       </table>
 
-      <div className="sd-table__add-column"></div>
-      <div className="sd-table__add-row"></div>
+      <button className="sd-table__add-column" onClick={props.addColumn}>+</button>
+      <button className="sd-table__add-row" onClick={props.addRow}>+</button>
     </div>
   )
 }
