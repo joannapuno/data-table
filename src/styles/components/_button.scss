@@ -1,8 +1,26 @@
 @use '../shared/variables' as *;
 
 .sd-button {
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+
     &--neutral {
         background-color: $neutral-100;
         border-color: $neutral-100;
+    }
+
+    &--transparent {
+        background-color: transparent;
+        border-color: transparent;
+
+        &:hover {
+            background-color: $neutral-50;
+            border-color: $neutral-50;
+        }
+    }
+
+    .sd-icon {
+        color: $neutral-800;
+        fill: $neutral-800;
     }
 }
