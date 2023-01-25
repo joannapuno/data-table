@@ -1,0 +1,37 @@
+@use '../shared/variables' as *;
+@use '../shared/spacings' as *;
+@use '../components/button' as *;
+
+.sd-table {
+    $parent: &;
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid;
+      border-color: $neutral-200;
+      text-align: left;
+
+      &#{$parent}--menu {
+        padding: 0;
+        max-width: 1rem;
+
+        #{$parent}--cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      }
+    }
+
+    th {
+        font-weight: normal;
+    }
+  
+    &--cell,
+    &--header {
+      padding: 0.5rem;
+    }
+  }

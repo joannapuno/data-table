@@ -1,0 +1,36 @@
+@use '../shared/variables' as *;
+@use '../shared/colours' as *;
+
+.sd-menu {
+    $parent: &;
+    position: relative;
+
+    &__menulist {
+        background-color: $white;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 15px 101px #00000021;
+        min-width: 8rem;
+        border-radius: 5px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    
+        #{$parent}-item {
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            text-align: left;
+    
+            &--leading-icon {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+    
+            &:hover {
+                background-color: $neutral-50;
+            }
+        }
+    }
+}

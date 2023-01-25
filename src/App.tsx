@@ -1,16 +1,26 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-import SmartTable from './components/SmartTable/SmartTable'
+import { Table } from "@/components";
 import './styles/app.scss'
 
-function App() {
-  // const [count, setCount] = useState(0)
+type Row = { [key: string]: string | number };
+const dummyData: Row[] = [
+  {
+    name: "Anya Foger",
+    description: "Espaaa"
+  },
+  {
+    name: "Kakarot",
+    description: "Ricee"
+  },
+  {
+    name: "Naruto Uzumaki",
+    description: "Dattebayo"
+  }
+];
 
+export default function App() {
   return (
     <div className="App">
-      <SmartTable />
+      <Table dataSet={dummyData} />
     </div>
-  )
+  );
 }
-
-export default App
