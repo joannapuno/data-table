@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Menu from "./Menu"
+import { Menu, Button } from "@/components"
 import "../styles/components/table.scss";
 
 type Column = {
@@ -49,9 +49,7 @@ export default function Table(props: Props) {
         {/* MENU */}
         <td className="sd-table--menu">
           <div className="sd-table--cell">
-            <button className="sd-button sd-button--transparent">
-              <span className="sd-icon fa-solid fa-ellipsis-h"></span>
-            </button>
+            <Menu />
           </div>
         </td>
       </tr>
@@ -59,8 +57,7 @@ export default function Table(props: Props) {
   });
 
   return (
-    <div className="sd-table">
-      <Menu />
+    <div className="sd-table p-24">
       <table>
         <thead>
           <tr>

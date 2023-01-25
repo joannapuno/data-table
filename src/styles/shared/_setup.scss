@@ -1,10 +1,7 @@
-@use './shared/variables' as *;
-
 body {
     font-family: $font-family;
-    font-size: 16px;
+    font-size: 1rem;
 }
-
 * {
     margin: 0;
     padding: 0;
@@ -13,12 +10,6 @@ body {
 
 button {
     background-color: transparent;
-    border: 1px solid;
-    border-color: transparent;
+    border: none;
     cursor: pointer;
-}
-
-body {
-    font-family: $font-family;
-    font-size: 1rem;
 }

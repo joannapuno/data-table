@@ -1,4 +1,4 @@
-import Table from "./components/Table";
+import { Table } from "@/components";
 import './styles/app.scss'
 
 type Row = { [key: string]: string | number };

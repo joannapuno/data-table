@@ -1,0 +1,69 @@
+@function toRem($value) {
+    $newVal: calc($value / 16);
+    @return $newVal + rem;
+}
+
+@mixin flex($direction: 'row', $justifyContent: '', $alignItems: '') {
+    display: flex;
+    flex-direction: #{$direction};
+    
+    @if($justifyContent) {
+        justify-content: #{$justifyContent};
+    }
+    @if($alignItems) {
+        align-items: #{$alignItems};
+    }
+}
+
+@mixin set-padding($value, $position: 'all') {
+    @if $position == 'all' {
+        padding: toRem($value);
+    } 
+    @else if $position == 'y' {
+        padding-top: toRem($value);
+        padding-bottom: toRem($value);
+    } 
+    @else if $position == 'x' {
+        padding-left: toRem($value);
+        padding-right: toRem($value);
+    } 
+    @else {
+        padding-#{$position}:  toRem($value);
+    }
+}
+
+// TODO: cleanup
+@mixin set-margin($value, $position: 'all') {
+    @if $value == 'auto' {
+        @if $position == 'all' {
+            margin: auto;
+        }
+        @else if $position == 'y' {
+            margin-top: auto;
+            margin-bottom: auto;
+        } 
+        @else if $position == 'x' {
+            margin-left: auto;
+            margin-right: auto;
+        } 
+        @else {
+            margin-#{$position}:  auto;
+        }
+    } 
+    @else {
+        @if $position == 'all' {
+            margin: toRem($value);
+        }
+        @else if $position == 'y' {
+            margin-top: toRem($value);
+            margin-bottom: toRem($value);
+        } 
+        @else if $position == 'x' {
+            margin-left: toRem($value);
+            margin-right: toRem($value);
+        } 
+        @else {
+            margin-#{$position}:  toRem($value);
+        }
+    }
+}
