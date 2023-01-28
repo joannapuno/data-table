@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
+import { Row } from '@/models'
 import "@/styles/components/_side-sheet.scss";
 
 type Props = {
 	id: string
-	rowData?: { name: string, description: string };
+	selectedRow?: Row
 	open?: boolean;
 	onClose: (val: boolean) => void;
 };
+
 export default function SideSheet(props: Props) {
 	const [isOpen, setIsOpen] = useState(props.open);
 	const wrapperRef = useRef(null);
@@ -35,7 +37,7 @@ export default function SideSheet(props: Props) {
 	return (
 		<div ref={wrapperRef} key={props.id} className={["sd-side-sheet", props.open ? "sd-side-sheet--open" : ""].join(" ")}>
 
-			<div className="sd-side-sheet__content">{props.rowData?.name}</div>
+			<div className="sd-side-sheet__content">{props.selectedRow?.character}</div>
 
 		</div>
 	);

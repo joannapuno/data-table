@@ -22,7 +22,7 @@ export default function Menu(props: Props) {
                     <span className="fa-solid fa-thumbtack"></span>
                     <span>Pin</span>
                 </button>
-                <button className="sd-menu-item text-red-500">Remove row</button>
+                <button className="sd-menu-item text-red-500">Remove</button>
             </div>
         )
     }

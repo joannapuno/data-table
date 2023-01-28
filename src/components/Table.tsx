@@ -1,46 +1,45 @@
 import { useState } from "react";
 import { Menu, Button, SideSheet } from "@/components"
+import { Row, Column } from '@/models'
 import "../styles/components/table.scss";
 
-type Column = {
-  field: string;
-  headerName: string;
-};
-
-type Row = { [key: string]: string | number };
 
 type Props = {
-  dataSet: Row[];
+  rows: Row[]
+  columns: Column[]
   onRowClick: (row: Row) => void
 }
 
 export default function Table(props: Props) {
-  const [colKeys] = useState(() =>
-    Object.keys(Object.assign({}, ...props.dataSet))
-  );
-
-  const [rows] = useState(props.dataSet);
-
-  const columns: Column[] = colKeys.map((colKey) => {
-    return {
-      field: colKey,
-      headerName: colKey.toUpperCase() //TODO:
-    };
-  });
-
-  const headerEls = columns.map((header, colIndex) => {
+  const headerEls = props.columns.map((header, colIndex) => {
+    if(!header.isShown) return
     return (
       <th key={`${header}__${colIndex}`}>
-        <div className="sd-table--header">{header.headerName}</div>
+        <div className="sd-table--header">{header.headerTitle}</div>
       </th>
     );
   });
 
-  const rowEls = rows.map((row, rowIndex) => {
+  const rowEls = props.rows.map((row, rowIndex) => {
     return (
       <tr 
         className="sd-table-row" 
         key={`sd-table-row--${rowIndex}`}>
+
+        <td className="sd-table--menu">
+          <div className="sd-table--cell">
+            Avatar here
+          </div>
+        </td>
+
+        {props.columns.map((col: Column, colIndex) => {
+          if(!col.isShown) return
+          return (
+            <td key={colIndex} onClick={() => props.onRowClick(row)}>
+              <div className="sd-table--cell">{ row[col.field as keyof Row] }</div>
+            </td>
+          );
+        })}
 
         {/* MENU */}
         <td className="sd-table--menu">
@@ -49,33 +48,27 @@ export default function Table(props: Props) {
           </div>
         </td>
 
-        {columns.map((col, colIndex) => {
-          return (
-            <td key={colIndex} onClick={() => props.onRowClick(row)}>
-              <div className="sd-table--cell">{row[col.field]}</div>
-            </td>
-          );
-        })}
-
       </tr>
     );
   });
 
 
   return (
-    <div>
-      <div className="sd-table">
-        <table>
-          <thead>
-            <tr>
-              {/* MENU */}
-              <th className="sd-table--menu"></th>
-              {headerEls}
-            </tr>
-          </thead>
-          <tbody>{rowEls}</tbody>
-        </table>
-      </div>
+    <div className="sd-table">
+      <table>
+        <thead>
+          <tr>
+            {/* AVATAR */}
+            <th className="sd-table--cell-avatar"></th>
+
+            {headerEls}
+
+            {/* MENU */}
+            <th className="sd-table--menu"></th>
+          </tr>
+        </thead>
+        <tbody>{rowEls}</tbody>
+      </table>
     </div>
   );
 }

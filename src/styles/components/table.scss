@@ -7,6 +7,7 @@
   width: 100%;
   border: 1.5px solid $terracotta;
   border-radius: 5px;
+  background-color: $white;
 
   table {
     border-collapse: collapse;
@@ -18,7 +19,6 @@
 
     &#{$parent}--menu {
       padding: 0;
-      max-width: 1rem;
 
       #{$parent}--cell {
           display: flex;
