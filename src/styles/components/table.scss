@@ -3,35 +3,70 @@
 @use '../components/button' as *;
 
 .sd-table {
-    $parent: &;
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    td, th {
-      border: 1px solid;
-      border-color: $neutral-200;
-      text-align: left;
+  $parent: &;
+  width: 100%;
+  border: 1.5px solid $terracotta;
+  border-radius: 5px;
 
-      &#{$parent}--menu {
-        padding: 0;
-        max-width: 1rem;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    text-align: left;
 
-        #{$parent}--cell {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    &#{$parent}--menu {
+      padding: 0;
+      max-width: 1rem;
+
+      #{$parent}--cell {
+          display: flex;
+          justify-content: center;
+          align-items: center;
       }
     }
+  }
 
-    th {
-        font-weight: normal;
+  th {
+      font-weight: normal;
+  }
+
+  td:not(:last-child),
+  th:not(:last-child) {
+    border-right: 1.5px solid $terracotta;
+  }
+
+  thead th {
+    background-color: $terracotta;
+    color: $white;
+  }
+
+  tr {
+    td {
+      border-top: 1.5px solid $terracotta;
+      color: $terracotta;
     }
-  
-    &--cell,
-    &--header {
-      padding: 0.5rem;
+
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: 5px;
+      }
+      td:last-child {
+        border-bottom-right-radius: 5px;
+      }
     }
   }
+
+  &--cell,
+  &--header {
+    padding: 0.5rem;
+  }
+
+  &-row{
+    cursor: pointer;
+    &:hover {
+      background-color: #ffebe6;
+    }
+  }
+}

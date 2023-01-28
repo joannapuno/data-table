@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Button } from "@/components"
+import { Menu, Button, SideSheet } from "@/components"
 import "../styles/components/table.scss";
 
 type Column = {
@@ -9,8 +9,9 @@ type Column = {
 
 type Row = { [key: string]: string | number };
 
-interface Props {
+type Props = {
   dataSet: Row[];
+  onRowClick: (row: Row) => void
 }
 
 export default function Table(props: Props) {
@@ -37,38 +38,44 @@ export default function Table(props: Props) {
 
   const rowEls = rows.map((row, rowIndex) => {
     return (
-      <tr key={`sd-table-row sd-table-row--${rowIndex}`}>
+      <tr 
+        className="sd-table-row" 
+        key={`sd-table-row--${rowIndex}`}>
+
+        {/* MENU */}
+        <td className="sd-table--menu">
+          <div className="sd-table--cell">
+            <Menu selectedRow={row} key={`menu--${rowIndex}`}/>
+          </div>
+        </td>
+
         {columns.map((col, colIndex) => {
           return (
-            <td key={colIndex}>
+            <td key={colIndex} onClick={() => props.onRowClick(row)}>
               <div className="sd-table--cell">{row[col.field]}</div>
             </td>
           );
         })}
 
-        {/* MENU */}
-        <td className="sd-table--menu">
-          <div className="sd-table--cell">
-            <Menu />
-          </div>
-        </td>
       </tr>
     );
   });
 
-  return (
-    <div className="sd-table p-24">
-      <table>
-        <thead>
-          <tr>
-            {headerEls}
 
-            {/* MENU */}
-            <th className="sd-table--menu"></th>
-          </tr>
-        </thead>
-        <tbody>{rowEls}</tbody>
-      </table>
+  return (
+    <div>
+      <div className="sd-table">
+        <table>
+          <thead>
+            <tr>
+              {/* MENU */}
+              <th className="sd-table--menu"></th>
+              {headerEls}
+            </tr>
+          </thead>
+          <tbody>{rowEls}</tbody>
+        </table>
+      </div>
     </div>
   );
 }

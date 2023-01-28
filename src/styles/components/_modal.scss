@@ -1,0 +1,38 @@
+@use '../shared/variables' as *;
+@use '../shared/mixins' as *;
+
+.sd-modal {
+    display: none;
+    justify-content: center;
+    
+    &--shown {
+        display: flex;
+    }
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: $neutral-700;
+
+    &__block {
+        max-height: 80vh;
+        background-color: $white;
+        border-radius: $border-radius;
+    }
+
+    &__top-bar,
+    &__content,
+    &__action-bar {
+        @include set-padding(40, 'x');
+    }
+
+    &__top-bar,
+    &__action-bar {
+        @include set-padding(16, 'y');
+    }
+    &__content {
+        @include set-padding(24, 'y');
+    }
+}

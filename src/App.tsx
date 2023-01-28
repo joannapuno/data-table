@@ -1,4 +1,5 @@
-import { Table } from "@/components";
+import { useState } from 'react'
+import { Table, SideSheet } from "@/components";
 import './styles/app.scss'
 
 type Row = { [key: string]: string | number };
@@ -17,10 +18,20 @@ const dummyData: Row[] = [
   }
 ];
 
+
 export default function App() {
+  const [selectedRow, setSelectedRow] = useState<Row>()
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const handleRowClick = (row: Row) => {
+    setSelectedRow(row)
+    setIsOpen(true)
+  }
+
   return (
     <div className="App">
-      <Table dataSet={dummyData} />
+      <SideSheet id="test" rowData={selectedRow} open={isOpen} onClose={(evt) => setIsOpen(evt)}/>
+      <Table dataSet={dummyData} onRowClick={handleRowClick} />
     </div>
   );
 }

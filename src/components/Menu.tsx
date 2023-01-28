@@ -1,19 +1,21 @@
 import { Button } from '@/components'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+import useClickAway from '@/hooks/useClickAway'
 import '../styles/components/_menu.scss'
 
 type Props = {
-    selectedRow?: {}[]
+    selectedRow?: {}
 }
 export default function Menu(props: Props) {
     const [isOpen, setIsOpen] = useState(false)
+    const menuRef = useRef(null)
 
-    const toggleMenu =  () => {
-        setIsOpen(!isOpen)
-    }
+    useClickAway(menuRef, () => {
+        setIsOpen(false)
+    })
 
     const renderMenuList = () => {
-        if(!isOpen) return
+        if(!isOpen) return null
         return (
             <div className="sd-menu__menulist">
                 <button className="sd-menu-item sd-menu-item--leading-icon">
@@ -25,8 +27,8 @@ export default function Menu(props: Props) {
         )
     }
     return (
-        <div className="sd-menu" role="menu">
-            <Button handleClick={toggleMenu} variant="transparent">
+        <div ref={menuRef} className="sd-menu" role="menu">
+            <Button handleClick={() => setIsOpen(!isOpen)} variant="transparent">
               <span className="sd-icon fa-solid fa-ellipsis-h"></span>
             </Button>
         

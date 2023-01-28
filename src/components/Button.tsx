@@ -4,7 +4,7 @@ import '@/styles/components/_button.scss'
 
 type Variants = 'primary' | 'neutral' | 'transparent'
 type Props = {
-    text?: '',
+    text?: string,
     variant?: Variants,
     children?: React.ReactNode,
     handleClick?: () => void
