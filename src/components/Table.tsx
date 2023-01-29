@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, Button, SideSheet } from "@/components"
+import React,{ useState } from "react";
+import { Menu, Thumbnail, SideSheet } from "@/components"
 import { Row, Column } from '@/models'
 import "../styles/components/table.scss";
 
@@ -11,11 +11,20 @@ type Props = {
 }
 
 export default function Table(props: Props) {
+  const getCharacterAvatar = (characterName: string) => {
+    const lowerCase = characterName.toLocaleLowerCase()
+    return (
+      <td className="sd-table--cell sd-table--menu">
+        <Thumbnail styleName="mx-auto" src={`avatar-${lowerCase}.jpeg`} circle />
+      </td>
+    )
+  }
+
   const headerEls = props.columns.map((header, colIndex) => {
     if(!header.isShown) return
     return (
-      <th key={`${header}__${colIndex}`}>
-        <div className="sd-table--header">{header.headerTitle}</div>
+      <th className="sd-table--header" key={`${header}__${colIndex}`}>
+        {header.headerTitle}
       </th>
     );
   });
@@ -26,26 +35,20 @@ export default function Table(props: Props) {
         className="sd-table-row" 
         key={`sd-table-row--${rowIndex}`}>
 
-        <td className="sd-table--menu">
-          <div className="sd-table--cell">
-            Avatar here
-          </div>
-        </td>
+        { getCharacterAvatar(row.character) }
 
         {props.columns.map((col: Column, colIndex) => {
           if(!col.isShown) return
           return (
-            <td key={colIndex} onClick={() => props.onRowClick(row)}>
-              <div className="sd-table--cell">{ row[col.field as keyof Row] }</div>
+            <td className="sd-table--cell" key={colIndex} onClick={() => props.onRowClick(row)}>
+              { row[col.field as keyof Row] }
             </td>
           );
         })}
 
         {/* MENU */}
-        <td className="sd-table--menu">
-          <div className="sd-table--cell">
-            <Menu selectedRow={row} key={`menu--${rowIndex}`}/>
-          </div>
+        <td className="sd-table--cell sd-table--menu">
+          <Menu selectedRow={row} key={`menu--${rowIndex}`}/>
         </td>
 
       </tr>

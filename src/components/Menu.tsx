@@ -28,8 +28,11 @@ export default function Menu(props: Props) {
     }
     return (
         <div ref={menuRef} className="sd-menu" role="menu">
-            <Button handleClick={() => setIsOpen(!isOpen)} variant="transparent">
-              <span className="sd-icon fa-solid fa-ellipsis-h"></span>
+            <Button 
+                ariaLabel="Row menu toggle"
+                icon="fa-solid fa-ellipsis-h" 
+                handleClick={() => setIsOpen(!isOpen)} 
+                variant="transparent">
             </Button>
         
             { renderMenuList() }

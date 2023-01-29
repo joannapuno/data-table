@@ -26,7 +26,7 @@ const rows: Row[] = [
   }, {
     character: "Albedo",
     element: 'geo',
-    role: 'support',
+    role: 'Support',
     level: 90,
     weapon: '',
     artifactSet: ['artifact', 'artifact'], // TODO: make artifact type
@@ -34,7 +34,7 @@ const rows: Row[] = [
   }, {
     character: "Fischl",
     element: 'electro',
-    role: 'support',
+    role: 'Support',
     level: 90,
     weapon: '',
     artifactSet: ['artifact', 'artifact'],
@@ -65,7 +65,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <TitleBar styleName="px-24" />
+      <TitleBar styleName="mx-24" />
 
       <div className="genshin-party-container px-24">
 

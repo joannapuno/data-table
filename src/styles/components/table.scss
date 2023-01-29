@@ -5,9 +5,9 @@
 .sd-table {
   $parent: &;
   width: 100%;
-  border: 1.5px solid $terracotta;
+  border: 1.5px solid $midnight;
   border-radius: 5px;
-  background-color: $white;
+  // background-color: $white;
 
   table {
     border-collapse: collapse;
@@ -16,36 +16,30 @@
   
   td, th {
     text-align: left;
-
-    &#{$parent}--menu {
-      padding: 0;
-
-      #{$parent}--cell {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
-    }
+    padding: 1rem;
   }
+  thead {
+    background-color: $midnight;
 
-  th {
+    th {
       font-weight: normal;
+      color: $white;
+    }
   }
 
   td:not(:last-child),
   th:not(:last-child) {
-    border-right: 1.5px solid $terracotta;
-  }
-
-  thead th {
-    background-color: $terracotta;
-    color: $white;
+    border-right: 1.5px solid $midnight;
   }
 
   tr {
     td {
-      border-top: 1.5px solid $terracotta;
-      color: $terracotta;
+      border-top: 1.5px solid $midnight;
+      // color: $terracotta;
+
+      &#{$parent}--menu {
+        text-align: center;
+      }
     }
 
     &:last-child {
@@ -58,15 +52,10 @@
     }
   }
 
-  &--cell,
-  &--header {
-    padding: 0.5rem;
-  }
-
   &-row{
     cursor: pointer;
     &:hover {
-      background-color: #ffebe6;
+      background-color: $midnight-50;
     }
   }
 }
