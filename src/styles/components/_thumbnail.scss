@@ -1,0 +1,31 @@
+@use '../shared/variables' as *;
+
+.sd-thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $midnight-50;
+    border-radius: 5px;
+
+    max-height: 5rem;
+    max-width: 5rem;
+
+    &--circle {
+        border-radius: 50%;
+
+        .sd-thumbnail-img {
+            border-radius: 50%;
+        }
+    }
+
+    &-icon {
+        padding: 1rem;
+        color: $midnight;
+    }
+
+    &-img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+}

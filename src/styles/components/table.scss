@@ -3,35 +3,58 @@
 @use '../components/button' as *;
 
 .sd-table {
-    $parent: &;
-    table {
-      border-collapse: collapse;
-      width: 100%;
+  $parent: &;
+  
+  border: 1.5px solid $midnight;
+  border-radius: 5px;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 1rem;
+  }
+  thead {
+    background-color: $midnight;
+
+    th {
+      font-weight: normal;
+      color: $white;
     }
-    
-    td, th {
-      border: 1px solid;
-      border-color: $neutral-200;
-      text-align: left;
+  }
+
+  td:not(:last-child),
+  th:not(:last-child) {
+    border-right: 1.5px solid $midnight;
+  }
+
+  tr {
+    td {
+      border-top: 1.5px solid $midnight;
+      // color: $terracotta;
 
       &#{$parent}--menu {
-        padding: 0;
-        max-width: 1rem;
-
-        #{$parent}--cell {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        text-align: center;
       }
     }
 
-    th {
-        font-weight: normal;
-    }
-  
-    &--cell,
-    &--header {
-      padding: 0.5rem;
+    &:last-child {
+      td:first-child {
+        border-bottom-left-radius: 5px;
+      }
+      td:last-child {
+        border-bottom-right-radius: 5px;
+      }
     }
   }
+
+  &-row{
+    cursor: pointer;
+    &:hover {
+      background-color: $midnight-50;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @use '../shared/variables' as *;
 
 .sd-button {
-    padding: 0.25rem 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
 
     &--neutral {
@@ -19,8 +19,8 @@
         }
     }
 
-    .sd-icon {
-        color: $neutral-800;
-        fill: $neutral-800;
+    &--icon {
+        padding: 1rem;
+        border-radius: 100px;
     }
 }

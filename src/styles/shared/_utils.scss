@@ -91,3 +91,22 @@
 .border-rounded-10 {
     border-radius: 10px;
 }
+
+/*****************
+*
+* DISPLAY FIELDS
+*
+******************/
+
+.sd-display-field {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    gap: 1rem;
+
+    &__label {
+        font-weight: 500;
+    }
+    &__value {
+        text-align: right;
+    }
+}
