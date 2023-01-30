@@ -4,10 +4,9 @@
 
 .sd-table {
   $parent: &;
-  width: 100%;
+  
   border: 1.5px solid $midnight;
   border-radius: 5px;
-  // background-color: $white;
 
   table {
     border-collapse: collapse;

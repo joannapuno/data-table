@@ -4,6 +4,8 @@ import '@/styles/components/_title-bar.scss'
 
 type Props = {
     styleName?:string
+    toggleWidth: () => void
+    toggleLayout: () => void
 }
 
 export default function TitleBar(props: Props) {
@@ -18,11 +20,15 @@ export default function TitleBar(props: Props) {
                 <Button
                     ariaLabel="Card view" 
                     icon="fa-solid fa-border-all"
-                    circle />
+                    circle
+                    title="Toggle View Layout"
+                    handleClick={props.toggleLayout} />
                 <Button 
                     ariaLabel="Full width"
                     icon="fa-solid fa-arrows-left-right"
-                    circle />
+                    circle
+                    title="Toggle Width"
+                    handleClick={props.toggleWidth} />
             </div>
         </div>
     )

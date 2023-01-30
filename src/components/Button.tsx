@@ -11,6 +11,7 @@ type Props = {
     children?: React.ReactNode
     circle?: boolean
     icon?: string
+    title?: string
     handleClick?: () => void
 }
 
@@ -39,7 +40,8 @@ export default function Button(props: Props) {
             aria-label={props.ariaLabel} 
             onClick={props.handleClick}
             className={btnClasses} 
-            role="button">
+            role="button"
+            title={props.title}>
                 { btnChildren() }
         </button>
     )

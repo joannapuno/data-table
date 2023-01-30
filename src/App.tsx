@@ -2,42 +2,43 @@ import { useState } from 'react'
 import { Table, SideSheet, TitleBar } from "@/components";
 import { Row, Column } from '@/models'
 import './styles/app.scss'
+import classNames from 'classnames';
 
 const hiddenColumns = ['element', 'weapon', 'artifactSet']
 
 const rows: Row[] = [
   {
     character: "Xiao",
-    element: 'anemo',
+    element: 'Anemo',
     role: 'DPS',
     level: 90,
-    weapon: '',
-    artifactSet: ['artifact', 'artifact'],
-    notes: 'space + jump, my best boi UwU'
+    weapon: 'Primordial Jade Winged-Spear',
+    artifactSet: ['Viridescent + Gladiator'],
+    notes: 'My cinnamon roll UwU'
   },
   {
     character: "Jean",
-    element: 'anemo',
+    element: 'Anemo',
     role: 'Healer',
     level: 90,
-    weapon: '',
-    artifactSet: ['artifact', 'artifact'],
+    weapon: 'Favonious Sword',
+    artifactSet: ['Viridescent + Gladiator'],
     notes: 'Big Sis'
   }, {
     character: "Albedo",
-    element: 'geo',
+    element: 'Geo',
     role: 'Support',
     level: 90,
-    weapon: '',
-    artifactSet: ['artifact', 'artifact'], // TODO: make artifact type
+    weapon: 'Cinnabar Spindle',
+    artifactSet: ['Opulent'], // TODO: make artifact type
     notes: 'Extra DMG <3'
   }, {
     character: "Fischl",
-    element: 'electro',
+    element: 'Electro',
     role: 'Support',
     level: 90,
-    weapon: '',
-    artifactSet: ['artifact', 'artifact'],
+    weapon: 'Favonious Bow',
+    artifactSet: ['Shimenawa + Thunder'],
     notes: 'Energy, extra DMG and reactions. Plus a bird'
   },
 ];
@@ -45,6 +46,7 @@ const rows: Row[] = [
 export default function App() {
   const [selectedRow, setSelectedRow] = useState<Row>()
   const [isOpen, setIsOpen] = useState(false)
+  const [isFullwidth, setIsFullwidth] = useState(false)
 
   const [colKeys] = useState(() =>
     Object.keys(Object.assign({}, ...rows))
@@ -63,11 +65,19 @@ export default function App() {
     setIsOpen(true)
   }
 
+  const toggleLayout = () => {
+    console.log('Coming Soon :D')
+  }
+
   return (
     <div className="App">
-      <TitleBar styleName="mx-24" />
 
-      <div className="genshin-party-container px-24">
+      <div className={classNames('sd-table-wrapper', 'px-24', isFullwidth ? 'sd-table-wrapper--full-width' : '')}>
+
+        <TitleBar 
+          styleName="py-16" 
+          toggleWidth={() => setIsFullwidth(!isFullwidth)}
+          toggleLayout={() => toggleLayout()} />
 
         {/* TODO: Move in table */}
         <SideSheet 

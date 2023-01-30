@@ -22,12 +22,17 @@ div#root {
     height: 100vh;
 
     div.App {
-        max-width: 90rem;
         height: 100%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 1rem;
+        padding: 8rem 0;
+
+        //TODO: Move this
+        .sd-table-wrapper {
+            max-width: 90rem;
+            margin: 0 auto;
+
+            &--full-width {
+                max-width: 100%;
+            }
+        }
     }
 }
