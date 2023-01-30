@@ -11,5 +11,3 @@ I love ducks so I named this Design System "Sweet Duckling"
 
 Just experimenting right now so this project is just my playground atm~ I'd like to see how I will use the components before they make it into Sweet Duckling~
 
-
-![Screen Shot 2023-01-29 at 6 12 20 PM](https://user-images.githubusercontent.com/43177699/215368410-6f46c474-de54-4e5b-b2f3-9727cae38f27.png)
