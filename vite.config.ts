@@ -11,11 +11,12 @@ export default defineConfig({
       { find: '@', replacement: path.resolve(__dirname, 'src')}
     ]
   },
-  build: {
-    lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'SweetDuckling',
-      fileName: (format) => `sweet-duckling.${format}.js`
-    }
-  }
+  // TODO: For when everything is ready
+  // build: {
+  //   lib: {
+  //     entry: path.resolve(__dirname, 'src/index.ts'),
+  //     name: 'SweetDuckling',
+  //     fileName: (format) => `sweet-duckling.${format}.js`
+  //   }
+  // }
 })

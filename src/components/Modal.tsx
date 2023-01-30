@@ -35,7 +35,7 @@ export default function Modal(props: Props) {
                    { props.children }
                 </div>
                 <div className="sd-modal__action-bar">
-                    <Button text="Cancel" handleClick={toggleModal}/>
+                    <Button text="Cancel" ariaLabel="Cancel" handleClick={toggleModal}/>
                 </div>
             </div>
         </div>
