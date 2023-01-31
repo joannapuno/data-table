@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components'
 import '@/styles/components/_modal.scss'
 
-type Row = { [key: string]: string | number };
 type Props = {
-    rowData: Row,
     open?: boolean,
     children?:React.ReactNode
 } & typeof defaultProps
@@ -19,12 +17,6 @@ export default function Modal(props: Props) {
 
     const toggleModal = () => {
         setIsOpen(!isOpen)
-    }
-
-    if(!isOpen) {
-        return (
-            <div className='sd-modal'></div>
-        )
     }
     
     return (

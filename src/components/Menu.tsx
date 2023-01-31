@@ -1,10 +1,13 @@
 import { Button } from '@/components'
+import { Row } from '@/models'
 import { useState, useRef } from 'react'
 import useClickAway from '@/hooks/useClickAway'
 import '../styles/components/_menu.scss'
 
 type Props = {
-    selectedRow?: {}
+    selectedRow?: Row
+    handlePin?:() => void
+    handleRemove?: () => void
 }
 export default function Menu(props: Props) {
     const [isOpen, setIsOpen] = useState(false)
@@ -18,11 +21,11 @@ export default function Menu(props: Props) {
         if(!isOpen) return null
         return (
             <div className="sd-menu__menulist">
-                <button className="sd-menu-item sd-menu-item--leading-icon">
+                <button onClick={props.handlePin} className="sd-menu-item sd-menu-item--leading-icon">
                     <span className="fa-solid fa-thumbtack"></span>
                     <span>Pin</span>
                 </button>
-                <button className="sd-menu-item text-red-500">Remove</button>
+                <button onClick={props.handleRemove} className="sd-menu-item text-red-500">Remove</button>
             </div>
         )
     }

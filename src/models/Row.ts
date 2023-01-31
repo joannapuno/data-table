@@ -1,9 +1,10 @@
 export type Row = { 
-    character: string
-    element: string
-    role: string
-    level: number
-    weapon: string
-    artifactSet: string[]
-    notes: string
+    id?: number | null
+    character?: string
+    element?: string
+    role?: string
+    level?: number | null
+    weapon?: string
+    artifactSet?: string[]
+    notes?: string
 }

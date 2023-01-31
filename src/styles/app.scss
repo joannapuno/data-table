@@ -29,6 +29,7 @@ div#root {
         .sd-table-wrapper {
             max-width: 90rem;
             margin: 0 auto;
+            transition: 0.2s ease-in;
 
             &--full-width {
                 max-width: 100%;

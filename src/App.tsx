@@ -1,49 +1,56 @@
 import { useState } from 'react'
-import { Table, SideSheet, TitleBar } from "@/components";
+import { Table, SideSheet, TitleBar, Modal, Button } from "@/components"
 import { Row, Column } from '@/models'
 import './styles/app.scss'
-import classNames from 'classnames';
+import classNames from 'classnames'
 
-const hiddenColumns = ['element', 'weapon', 'artifactSet']
+const hiddenColumns = ['id', 'element', 'weapon', 'artifactSet']
 
 const rows: Row[] = [
   {
+    id: 1,
     character: "Xiao",
     element: 'Anemo',
     role: 'DPS',
     level: 90,
     weapon: 'Primordial Jade Winged-Spear',
     artifactSet: ['Viridescent + Gladiator'],
-    notes: 'My cinnamon roll UwU'
+    notes: 'Glass cannon'
   },
   {
+    id: 12,
     character: "Jean",
     element: 'Anemo',
     role: 'Healer',
     level: 90,
     weapon: 'Favonious Sword',
     artifactSet: ['Viridescent + Gladiator'],
-    notes: 'Big Sis'
-  }, {
+    notes: 'Battery for Xiao plus a great healer'
+  }, 
+  {
+    id: 13,
     character: "Albedo",
     element: 'Geo',
     role: 'Support',
     level: 90,
     weapon: 'Cinnabar Spindle',
     artifactSet: ['Opulent'], // TODO: make artifact type
-    notes: 'Extra DMG <3'
-  }, {
+    notes: 'Extra DMG and bonus shield with elemental reactions'
+  }, 
+  {
+    id: 14,
     character: "Fischl",
     element: 'Electro',
     role: 'Support',
     level: 90,
     weapon: 'Favonious Bow',
     artifactSet: ['Shimenawa + Thunder'],
-    notes: 'Energy, extra DMG and reactions. Plus a bird'
+    notes: 'Extra energy, extra DMG and reactions'
   },
 ];
 
 export default function App() {
+  const [scopedRows, setScopedRows] = useState(rows)
   const [selectedRow, setSelectedRow] = useState<Row>()
   const [isOpen, setIsOpen] = useState(false)
   const [isFullwidth, setIsFullwidth] = useState(false)
@@ -69,15 +76,35 @@ export default function App() {
     console.log('Coming Soon :D')
   }
 
+  const handleRowDelete = (rowId: number) => {
+    setScopedRows(scopedRows.filter(row => row.id !== rowId))
+  }
+
+  const handleAddRow = () => {
+    // open form in modal
+    // on submit, add new character
+    // check if character avatar doesnt exists, add default img
+    const newData: Row = {
+      id: null,
+      character: '',
+      element: '',
+      role: '',
+      level: null,
+      weapon: '',
+      artifactSet: [],
+      notes: ''
+    };
+    setScopedRows([...scopedRows, newData])
+  }
+
   return (
     <div className="App">
 
       <div className={classNames('sd-table-wrapper', 'px-24', isFullwidth ? 'sd-table-wrapper--full-width' : '')}>
-
-        <TitleBar 
-          styleName="py-16" 
-          toggleWidth={() => setIsFullwidth(!isFullwidth)}
-          toggleLayout={() => toggleLayout()} />
+      <TitleBar 
+        styleName="py-16" 
+        toggleWidth={() => setIsFullwidth(!isFullwidth)}
+        toggleLayout={() => toggleLayout()} />
 
         {/* TODO: Move in table */}
         <SideSheet 
@@ -87,9 +114,13 @@ export default function App() {
           onClose={(evt) => setIsOpen(evt)} />
 
         <Table 
-          rows={rows} 
+          rows={scopedRows} 
           columns={columns} 
-          onRowClick={handleRowClick} />
+          onRowClick={handleRowClick}
+          handleRowDelete={handleRowDelete} />
+          
+        <Button text="Add character" ariaLabel="Add character" handleClick={handleAddRow}/>
+        
       </div>
     </div>
   );

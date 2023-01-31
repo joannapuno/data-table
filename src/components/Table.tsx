@@ -1,13 +1,13 @@
-import React,{ useState } from "react";
+import React,{ useReducer, useState } from "react";
 import { Menu, Thumbnail, SideSheet } from "@/components"
 import { Row, Column } from '@/models'
 import "../styles/components/table.scss";
-
 
 type Props = {
   rows: Row[]
   columns: Column[]
   onRowClick: (row: Row) => void
+  handleRowDelete: (rowId: number) => void
 }
 
 export default function Table(props: Props) {
@@ -31,27 +31,30 @@ export default function Table(props: Props) {
 
   const rowEls = props.rows.map((row, rowIndex) => {
     return (
-      <tr 
-        className="sd-table-row" 
-        key={`sd-table-row--${rowIndex}`}>
+    <tr 
+      className="sd-table-row" 
+      key={`sd-table-row--${rowIndex}`}>
 
-        { getCharacterAvatar(row.character) }
+      { getCharacterAvatar(row.character) }
 
-        {props.columns.map((col: Column, colIndex) => {
-          if(!col.isShown) return
-          return (
-            <td className="sd-table--cell" key={colIndex} onClick={() => props.onRowClick(row)}>
-              { row[col.field as keyof Row] }
-            </td>
-          );
-        })}
+      {props.columns.map((col: Column, colIndex) => {
+        if(!col.isShown) return
+        return (
+          <td className="sd-table--cell" key={colIndex} onClick={() => props.onRowClick(row)}>
+            { row[col.field as keyof Row] }
+          </td>
+        );
+      })}
 
-        {/* MENU */}
-        <td className="sd-table--cell sd-table--menu">
-          <Menu selectedRow={row} key={`menu--${rowIndex}`}/>
-        </td>
+      {/* MENU */}
+      <td className="sd-table--cell sd-table--menu">
+        <Menu 
+          selectedRow={row} 
+          key={`menu--${rowIndex}`}
+          handleRemove={() => props.handleRowDelete(row.id)}/>
+      </td>
 
-      </tr>
+    </tr>
     );
   });
 
