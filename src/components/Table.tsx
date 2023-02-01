@@ -35,7 +35,7 @@ export default function Table(props: Props) {
       className="sd-table-row" 
       key={`sd-table-row--${rowIndex}`}>
 
-      { getCharacterAvatar(row.character) }
+      { getCharacterAvatar(row.character as string) }
 
       {props.columns.map((col: Column, colIndex) => {
         if(!col.isShown) return
@@ -51,7 +51,7 @@ export default function Table(props: Props) {
         <Menu 
           selectedRow={row} 
           key={`menu--${rowIndex}`}
-          handleRemove={() => props.handleRowDelete(row.id)}/>
+          handleRemove={() => props.handleRowDelete(row.id as number)}/>
       </td>
 
     </tr>
