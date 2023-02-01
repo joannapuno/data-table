@@ -2,24 +2,15 @@
 @use '../shared/mixins' as *;
 
 .sd-modal {
+    $parent: &;
     display: none;
-    justify-content: center;
-    
-    &--shown {
-        display: flex;
-    }
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: $neutral-700;
 
     &__block {
-        max-height: 80vh;
+        height: 0;
+        opacity: 0;
         background-color: $white;
         border-radius: $border-radius;
+        transition: 0.2s ease-in;
     }
 
     &__top-bar,
@@ -34,5 +25,40 @@
     }
     &__content {
         @include set-padding(24, 'y');
+    }
+
+    &--open {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #3d405b7a;
+        backdrop-filter: blur(1.5px);
+        z-index: 10;
+
+        #{$parent}__block {
+            height: fit-content;
+            max-height: 80vh;
+            opacity: 1;
+            transition: 0.2s ease-in;
+            position: fixed;
+            background-color: $white;
+            z-index: 1;
+        }
+        // &:after {
+        //     content: "";
+        //     position: fixed;
+        //     top: 0;
+        //     bottom: 0;
+        //     left: 0;
+        //     right: 0;
+        //     background-color: #3d405b7a;
+        //     backdrop-filter: blur(1.5px);
+        //   }
     }
 }

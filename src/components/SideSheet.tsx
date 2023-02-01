@@ -12,7 +12,7 @@ type Props = {
 export default function SideSheet(props: Props) {
 	const [isOpen, setIsOpen] = useState(props.open);
 	const wrapperRef = useRef(null);
-	const selectedCharacter = props.selectedRow?.character.toLowerCase()
+	const selectedCharacter = props.selectedRow?.character?.toLowerCase()
 
 	// TODO: This could be better
 	useEffect(() => {

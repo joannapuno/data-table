@@ -54,6 +54,7 @@ export default function App() {
   const [selectedRow, setSelectedRow] = useState<Row>()
   const [isOpen, setIsOpen] = useState(false)
   const [isFullwidth, setIsFullwidth] = useState(false)
+  const [isAddNewModal, setIsAddNewModal] = useState(false)
 
   const [colKeys] = useState(() =>
     Object.keys(Object.assign({}, ...rows))
@@ -84,19 +85,26 @@ export default function App() {
     // open form in modal
     // on submit, add new character
     // check if character avatar doesnt exists, add default img
-    const newData: Row = {
-      id: null,
-      character: '',
-      element: '',
-      role: '',
-      level: null,
-      weapon: '',
-      artifactSet: [],
-      notes: ''
-    };
-    setScopedRows([...scopedRows, newData])
+    // const newData: Row = {
+    //   id: null,
+    //   character: '',
+    //   element: '',
+    //   role: '',
+    //   level: null,
+    //   weapon: '',
+    //   artifactSet: [],
+    //   notes: ''
+    // };
+    // setScopedRows([...scopedRows, newData])
+    setIsAddNewModal(true)
   }
 
+  
+  
+  
+  // const handleOpenModal = () => {
+
+  // }
   return (
     <div className="App">
 
@@ -120,6 +128,10 @@ export default function App() {
           handleRowDelete={handleRowDelete} />
           
         <Button text="Add character" ariaLabel="Add character" handleClick={handleAddRow}/>
+
+        <Modal open={isAddNewModal} onClose={(evt) => setIsAddNewModal(evt)}>
+          Add a form here~
+        </Modal>
         
       </div>
     </div>
