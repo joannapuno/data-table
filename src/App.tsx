@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table, SideSheet, TitleBar, Modal, Button } from "@/components"
+import { Table, SideSheet, TitleBar, Modal, Button, AddNewRowForm } from "@/components"
 import { Row, Column } from '@/models'
 import './styles/app.scss'
 import classNames from 'classnames'
@@ -81,25 +81,9 @@ export default function App() {
     setScopedRows(scopedRows.filter(row => row.id !== rowId))
   }
 
-  const handleAddRow = () => {
-    // open form in modal
-    // on submit, add new character
-    // check if character avatar doesnt exists, add default img
-    // const newData: Row = {
-    //   id: null,
-    //   character: '',
-    //   element: '',
-    //   role: '',
-    //   level: null,
-    //   weapon: '',
-    //   artifactSet: [],
-    //   notes: ''
-    // };
-    // setScopedRows([...scopedRows, newData])
+  const onSubmitForm = () => {
     setIsAddNewModal(true)
   }
-
-  
   
   
   // const handleOpenModal = () => {
@@ -127,10 +111,10 @@ export default function App() {
           onRowClick={handleRowClick}
           handleRowDelete={handleRowDelete} />
           
-        <Button text="Add character" ariaLabel="Add character" handleClick={handleAddRow}/>
+        <Button styleName="my-16" text="Add character" ariaLabel="Add character" handleClick={() => setIsAddNewModal(true)}/>
 
         <Modal open={isAddNewModal} onClose={(evt) => setIsAddNewModal(evt)}>
-          Add a form here~
+          <AddNewRowForm id="add-new-row" onSubmit={() => onSubmitForm} />
         </Modal>
         
       </div>

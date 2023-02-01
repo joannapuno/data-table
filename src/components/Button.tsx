@@ -12,6 +12,7 @@ type Props = {
     circle?: boolean
     icon?: string
     title?: string
+    styleName?: string
     handleClick?: () => void
 }
 
@@ -19,6 +20,7 @@ type Props = {
 export default function Button(props: Props) {
     const btnVariant = props.variant ? props.variant : 'neutral'
     const btnClasses = classNames(
+        props.styleName,
         'sd-button', 
         `sd-button--${btnVariant}`, 
         props.circle ? 'sd-button--circle' : '',

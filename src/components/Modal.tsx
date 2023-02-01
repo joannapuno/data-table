@@ -49,7 +49,7 @@ export default function Modal(props: Props) {
                 </div>
 
                 <div className="sd-modal__action-bar">
-                    <Button text="Cancel" ariaLabel="Cancel" handleClick={() => closeModal}/>
+                    <Button text="Cancel" ariaLabel="Cancel" handleClick={() => closeModal()}/>
                 </div>
             </div>
         </div>

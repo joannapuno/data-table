@@ -5,6 +5,7 @@ export { default as Modal } from './Modal'
 export { default as Table } from './Table'
 export { default as SideSheet } from './SideSheet'
 export { default as Thumbnail } from './Thumbnail'
+export { default as AddNewRowForm } from './AddNewRowForm'
 
 // LAYOUT
 export { default as TitleBar } from './TitleBar'
