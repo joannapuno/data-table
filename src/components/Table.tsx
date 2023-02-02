@@ -1,7 +1,7 @@
-import React,{ useReducer, useState } from "react";
+import React,{ useReducer, useState } from "react"
 import { Menu, Thumbnail, SideSheet } from "@/components"
-import { Row, Column } from '@/models'
-import "../styles/components/table.scss";
+import { Row, Column } from "@/models"
+import "../styles/components/table.scss"
 
 type Props = {
   rows: Row[]
@@ -11,70 +11,70 @@ type Props = {
 }
 
 export default function Table(props: Props) {
-  const getCharacterAvatar = (characterName: string) => {
-    const lowerCase = characterName.toLocaleLowerCase()
-    return (
-      <td className="sd-table--cell sd-table--menu">
-        <Thumbnail styleName="mx-auto" src={`avatar-${lowerCase}.jpeg`} circle />
-      </td>
-    )
-  }
+	const getCharacterAvatar = (characterName: string) => {
+		const lowerCase = characterName.toLocaleLowerCase()
+		return (
+			<td className="sd-table--cell sd-table--menu">
+				<Thumbnail styleName="mx-auto" src={`avatar-${lowerCase}.jpeg`} circle />
+			</td>
+		)
+	}
 
-  const headerEls = props.columns.map((header, colIndex) => {
-    if(!header.isShown) return
-    return (
-      <th className="sd-table--header" key={`${header}__${colIndex}`}>
-        {header.headerTitle}
-      </th>
-    );
-  });
+	const headerEls = props.columns.map((header, colIndex) => {
+		if(!header.isShown) return
+		return (
+			<th className="sd-table--header" key={`${header}__${colIndex}`}>
+				{header.headerTitle}
+			</th>
+		)
+	})
 
-  const rowEls = props.rows.map((row, rowIndex) => {
-    return (
-    <tr 
-      className="sd-table-row" 
-      key={`sd-table-row--${rowIndex}`}>
+	const rowEls = props.rows.map((row, rowIndex) => {
+		return (
+			<tr 
+				className="sd-table-row" 
+				key={`sd-table-row--${rowIndex}`}>
 
-      { getCharacterAvatar(row.character as string) }
+				{ getCharacterAvatar(row.character as string) }
 
-      {props.columns.map((col: Column, colIndex) => {
-        if(!col.isShown) return
-        return (
-          <td className="sd-table--cell" key={colIndex} onClick={() => props.onRowClick(row)}>
-            { row[col.field as keyof Row] }
-          </td>
-        );
-      })}
+				{props.columns.map((col: Column, colIndex) => {
+					if(!col.isShown) return
+					return (
+						<td className="sd-table--cell" key={colIndex} onClick={() => props.onRowClick(row)}>
+							{ row[col.field as keyof Row] }
+						</td>
+					)
+				})}
 
-      {/* MENU */}
-      <td className="sd-table--cell sd-table--menu">
-        <Menu 
-          selectedRow={row} 
-          key={`menu--${rowIndex}`}
-          handleRemove={() => props.handleRowDelete(row.id as number)}/>
-      </td>
+				{/* MENU */}
+				<td className="sd-table--cell sd-table--menu">
+					<Menu 
+						selectedRow={row} 
+						key={`menu--${rowIndex}`}
+						handleRemove={() => props.handleRowDelete(row.id as number)}/>
+				</td>
 
-    </tr>
-    );
-  });
+			</tr>
+		)
+	})
 
 
-  return (
-    <div className="sd-table">
-      <table>
-        <thead>
-          <tr>
-            {/* AVATAR */}
-            <th className="sd-table--cell-avatar"></th>
+	return (
+		<div className="sd-table">
+			<table>
+				<thead>
+					<tr>
+						{/* AVATAR */}
+						<th className="sd-table--cell-avatar"></th>
 
-            {headerEls}
+						{headerEls}
 
-            {/* MENU */}
-            <th className="sd-table--menu"></th>
-          </tr>
-        </thead>
-        <tbody>{rowEls}</tbody>
-      </table>
-    </div>
-  );
+						{/* MENU */}
+						<th className="sd-table--menu"></th>
+					</tr>
+				</thead>
+				<tbody>{rowEls}</tbody>
+			</table>
+		</div>
+	)
 }

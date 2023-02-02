@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { Button, Icon } from '@/components'
-import '@/styles/components/_modal.scss'
-import classNames from 'classnames'
+import React, { useRef, useState, useEffect } from "react"
+import { Button, Icon } from "@/components"
+import "@/styles/components/_modal.scss"
+import classNames from "classnames"
 
 type Props = {
     open?: boolean,
@@ -10,55 +10,55 @@ type Props = {
 }
 
 export default function Modal(props: Props) {
-    const modalRef = useRef(null)
-    const [isOpen, setIsOpen] = useState(props.open)
-    const modalClasses = classNames('sd-modal', props.open ? 'sd-modal--open' : '')
+	const modalRef = useRef(null)
+	const [isOpen, setIsOpen] = useState(props.open)
+	const modalClasses = classNames("sd-modal", props.open ? "sd-modal--open" : "")
 
-    const closeModal = () => {
-        setIsOpen(false)
-        props.onClose(false)
-    }
+	const closeModal = () => {
+		setIsOpen(false)
+		props.onClose(false)
+	}
 
-    // TODO: This could be better
+	// TODO: This could be better
 	useEffect(() => {
 		setIsOpen(props.open)
 
 		const handleClickAway = (evt: Event) => {
 			const el = evt.target as HTMLElement
 
-			if(el.classList.contains('sd-modal')) {
+			if(el.classList.contains("sd-modal")) {
 				setIsOpen(false)
 				props.onClose(false)
 			}
 		}
-        document.addEventListener("mousedown", handleClickAway);
+		document.addEventListener("mousedown", handleClickAway)
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickAway);
-            setIsOpen(false)
-        };
+		return () => {
+			document.removeEventListener("mousedown", handleClickAway)
+			setIsOpen(false)
+		}
 	}, [props.open, modalRef])
     
-    return (
-        <div ref={modalRef} className={modalClasses}>
-            <div className="sd-modal__block">
-                <div className="sd-modal__top-bar">
-                    <h2 className='sd-modal__title text-md-regular'>Add New Character</h2>
-                    <Button 
-                        icon="fa-solid fa-xmark" 
-                        ariaLabel='Close Modal'
-                        variant='transparent' 
-                        handleClick={() => closeModal()} />
-                </div>
+	return (
+		<div ref={modalRef} className={modalClasses}>
+			<div className="sd-modal__block">
+				<div className="sd-modal__top-bar">
+					<h2 className='sd-modal__title text-md-regular'>Add New Character</h2>
+					<Button 
+						icon="fa-solid fa-xmark" 
+						ariaLabel='Close Modal'
+						variant='transparent' 
+						handleClick={() => closeModal()} />
+				</div>
 
-                <div className="sd-modal__content">
-                   { props.children }
-                </div>
+				<div className="sd-modal__content">
+					{ props.children }
+				</div>
 
-                <div className="sd-modal__action-bar">
-                    <Button text="Cancel" ariaLabel="Cancel" handleClick={() => closeModal()}/>
-                </div>
-            </div>
-        </div>
-    )
+				<div className="sd-modal__action-bar">
+					<Button text="Cancel" ariaLabel="Cancel" handleClick={() => closeModal()}/>
+				</div>
+			</div>
+		</div>
+	)
 }
