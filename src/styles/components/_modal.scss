@@ -1,29 +1,40 @@
 @use '../shared/variables' as *;
 @use '../shared/mixins' as *;
+@use '../shared/typography' as *;
 
 .sd-modal {
     $parent: &;
     display: none;
 
     &__block {
-        height: 0;
-        opacity: 0;
+        height: fit-content;
+        max-height: 80vh;
+        min-width: 30rem;
+        max-width: 40rem;
         background-color: $white;
         border-radius: $border-radius;
-        transition: 0.2s ease-in;
+        position: fixed;
+        background-color: $white;
+        z-index: 1;
     }
-
-    &__top-bar,
-    &__content,
-    &__action-bar {
-        @include set-padding(40, 'x');
-    }
-
+    
     &__top-bar,
     &__action-bar {
         @include set-padding(16, 'y');
+        @include set-padding(16, 'right');
+        @include set-padding(32, 'left');
     }
+
+    &__top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid $neutral-100;
+    }
+
     &__content {
+        @include set-padding(40, 'x');
         @include set-padding(24, 'y');
     }
 
@@ -31,7 +42,6 @@
         display: grid;
         align-items: center;
         justify-items: center;
-
         position: fixed;
         top: 0;
         bottom: 0;
@@ -40,25 +50,5 @@
         background-color: #3d405b7a;
         backdrop-filter: blur(1.5px);
         z-index: 10;
-
-        #{$parent}__block {
-            height: fit-content;
-            max-height: 80vh;
-            opacity: 1;
-            transition: 0.2s ease-in;
-            position: fixed;
-            background-color: $white;
-            z-index: 1;
-        }
-        // &:after {
-        //     content: "";
-        //     position: fixed;
-        //     top: 0;
-        //     bottom: 0;
-        //     left: 0;
-        //     right: 0;
-        //     background-color: #3d405b7a;
-        //     backdrop-filter: blur(1.5px);
-        //   }
     }
 }

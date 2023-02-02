@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Button } from '@/components'
+import { Button, Icon } from '@/components'
 import '@/styles/components/_modal.scss'
 import classNames from 'classnames'
 
@@ -42,7 +42,14 @@ export default function Modal(props: Props) {
     return (
         <div ref={modalRef} className={modalClasses}>
             <div className="sd-modal__block">
-                <div className="sd-modal__top-bar"></div>
+                <div className="sd-modal__top-bar">
+                    <h2 className='sd-modal__title text-md-regular'>Add New Character</h2>
+                    <Button 
+                        icon="fa-solid fa-xmark" 
+                        ariaLabel='Close Modal'
+                        variant='transparent' 
+                        handleClick={() => closeModal()} />
+                </div>
 
                 <div className="sd-modal__content">
                    { props.children }

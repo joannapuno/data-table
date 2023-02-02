@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table, SideSheet, TitleBar, Modal, Button, AddNewRowForm } from "@/components"
+import { Table, SideSheet, TitleBar, AddNewModal, Button, AddNewRowForm } from "@/components"
 import { Row, Column } from '@/models'
 import './styles/app.scss'
 import classNames from 'classnames'
@@ -113,9 +113,10 @@ export default function App() {
           
         <Button styleName="my-16" text="Add character" ariaLabel="Add character" handleClick={() => setIsAddNewModal(true)}/>
 
-        <Modal open={isAddNewModal} onClose={(evt) => setIsAddNewModal(evt)}>
-          <AddNewRowForm id="add-new-row" onSubmit={() => onSubmitForm} />
-        </Modal>
+        <AddNewModal 
+          open={isAddNewModal}
+          onClose={() => setIsAddNewModal(false)}
+          onSubmit={onSubmitForm} />
         
       </div>
     </div>

@@ -1,0 +1,36 @@
+@use '../shared/variables' as *;
+@use '../shared/mixins' as *;
+@use '../shared/utils' as *;
+
+.sd-form {
+    $border-setup: 1px solid $neutral-100;
+    
+    .sd-dropdown {
+        $parent: &;
+        border: $border-setup;
+        border-radius: 5px;
+
+        &__selector {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            @include set-padding(16);
+            border-radius: 5px 5px 0 0;
+
+            .sd-dropdown__icon {
+                transition: 0.3s ease;
+            }
+        }
+    
+        &__list {
+            @include set-padding(8, 'x');
+            @include set-padding(24, 'y');
+            border-radius: 0 0 5px 5px;
+        }
+    }
+
+}

@@ -15,7 +15,7 @@ type Props = {
 export default function Thumbnail(props: Props) {
     
     const thumbnailSource = () => {
-        if(props.icon) return <Icon name={props.icon} styleName="sd-thumbnail-icon" />
+        if(props.icon) return <Icon name={props.icon} styleName="sd-thumbnail-icon" ariaLabel={props.alt ? props.alt : 'Thumbnail'} />
         else if(props.src) {
             return <img className="sd-thumbnail-img" src={props.src} alt={props.alt} />
         }

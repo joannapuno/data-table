@@ -31,7 +31,7 @@ export default function Button(props: Props) {
         if(props.text) {
             return <span>{props.text}</span>
         } else if(props.icon) {
-            return <Icon name={props.icon} />
+            return <Icon name={props.icon} ariaLabel={props.ariaLabel}/>
         } else {
             return props.children
         }
