@@ -1,4 +1,5 @@
-WIP~ Under Construction while I am learning React JS! But feel free to look around~
+# Under Construction 👷‍♀️
+My playground while learning ReactJs! But feel free to look around~
 
 # A Personal Design System
 
