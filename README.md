@@ -1,4 +1,4 @@
-WIP~ Under Construction but feel free to look around!
+WIP~ Under Construction while I am learning React JS! But feel free to look around~
 
 # A Personal Design System
 
