@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Table, SideSheet, TitleBar, AddNewModal, Button, AddNewRowForm } from "@/components"
-import { Row, Column } from "@/models"
+import { Row, Column } from "@/types"
+import useTableData from "@/hooks/useTableData"
 import "./styles/app.scss"
 import classNames from "classnames"
 
@@ -50,24 +51,12 @@ const rows: Row[] = [
 ]
 
 export default function App() {
-	const [scopedRows, setScopedRows] = useState(rows)
+	const tableData = useTableData()
 	const [selectedRow, setSelectedRow] = useState<Row>()
 	const [isOpen, setIsOpen] = useState(false)
 	const [isFullwidth, setIsFullwidth] = useState(false)
 	const [isAddNewModal, setIsAddNewModal] = useState(false)
 
-	const [colKeys] = useState(() =>
-		Object.keys(Object.assign({}, ...rows))
-	)
-
-	const columns: Column[] = colKeys.map((colKey) => {
-		return {
-			field: colKey,
-			headerTitle: colKey.charAt(0).toUpperCase() + colKey.slice(1),
-			isShown: !hiddenColumns.includes(colKey) ?? true 
-		}
-	})
-  
 	const handleRowClick = (row: Row) => {
 		setSelectedRow(row)
 		setIsOpen(true)
@@ -77,18 +66,22 @@ export default function App() {
 		console.log("Coming Soon :D")
 	}
 
-	const handleRowDelete = (rowId: number) => {
-		setScopedRows(scopedRows.filter(row => row.id !== rowId))
-	}
-
 	const onSubmitForm = () => {
 		setIsAddNewModal(true)
 	}
-  
-  
-	// const handleOpenModal = () => {
 
-	// }
+	const renderAddCharacButton = () => {
+		if(tableData.allowAddCharacter) {
+			return (
+				<Button 
+					styleName="my-16" 
+					text="Add character" 
+					ariaLabel="Add character" 
+					handleClick={() => setIsAddNewModal(true)} />
+			)
+		}
+	}
+  
 	return (
 		<div className="App">
 
@@ -106,12 +99,12 @@ export default function App() {
 					onClose={(evt) => setIsOpen(evt)} />
 
 				<Table 
-					rows={scopedRows} 
-					columns={columns} 
+					rows={tableData.tableRows} 
+					columns={tableData.tableColumns} 
 					onRowClick={handleRowClick}
-					handleRowDelete={handleRowDelete} />
+					handleRowDelete={tableData.handleRowDelete} />
           
-				<Button styleName="my-16" text="Add character" ariaLabel="Add character" handleClick={() => setIsAddNewModal(true)}/>
+				{ renderAddCharacButton() }
 
 				<AddNewModal 
 					open={isAddNewModal}

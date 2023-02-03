@@ -1,8 +1,10 @@
 import { useState } from "react"
-import { Row } from "@/models"
-import { Input, Icon, Button } from "@/components"
+import { DropdownOption, Character } from "@/types"
+import { Dropdown } from "@/components"
 import "@/styles/components/_form.scss"
 import classNames from "classnames"
+import useTableData from "@/hooks/useTableData"
+import useDropdownData from "@/hooks/useDropdownData"
 
 type Props = {
 	id: string
@@ -10,7 +12,27 @@ type Props = {
 }
 
 export default function AddNewRowForm(props: Props) {
-	const [dropdownOpen, setDropdownOpen] = useState(false)
+	const tableData = useTableData()
+	const charactersList = useDropdownData()
+	const [ allCharas ] = useState(charactersList.allCharactersList)
+
+	const mappedCharacters = () => {
+		const list: Character[] = []
+		allCharas.map(charac => {
+			const found = tableData.tableRows.find(row => row.character === charac.name)
+			if(!found) list.push(charac)
+		})
+		return list
+	}
+
+	const availableCharacs = mappedCharacters()
+	const characterOptions: DropdownOption[] = availableCharacs.map((row): DropdownOption => {
+		return {
+			label: row.name as string,
+			subLabel: row.element as string,
+			value: row.name?.toLowerCase()
+		}
+	})
 
 	const handleSubmit = (evt: SubmitEvent) => {
 		console.log("this is being submitted")
@@ -18,44 +40,13 @@ export default function AddNewRowForm(props: Props) {
 		props.onSubmit()
 	}
 
-	const openDropdown = (evt: React.MouseEvent<HTMLButtonElement>) => {
-		evt.preventDefault()
-		setDropdownOpen(!dropdownOpen)
-	}
-
-	const renderDropdownMenu = () => {
-		if (dropdownOpen) {
-			return (
-				<div className="sd-dropdown__list">
-					<div className="sd-dropdown__list-block">
-						<p className="label">Available Character(s)</p>
-
-						<div className="sd-dropdown__list-content">
-
-						</div>
-					</div>
-				</div>
-			)
-		}
+	const handleCharacterSelect = (val: string | number) => {
+		console.log(val)
 	}
 
 	return (
 		<form className="sd-form" id={props.id} onSubmit={() => handleSubmit}>
-
-			<div className="sd-dropdown">
-
-				<button role="button" className="sd-dropdown__selector" onClick={(evt) => openDropdown(evt)}>
-					<p className="sd-dropdown__label">Select Character</p>
-					<Icon
-						ariaLabel="Open Dropdown Icon"
-						name="fa-solid fa-chevron-down"
-						styleName={classNames("sd-dropdown__icon", dropdownOpen ? "rotate-180" : "")}
-					/>
-				</button>
-
-				{renderDropdownMenu()}
-
-			</div>
+			<Dropdown label="Select Character" options={characterOptions} onOptionSelect={handleCharacterSelect} />
 		</form>
 	)
 }

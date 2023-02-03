@@ -1,5 +1,5 @@
 import { Button } from "@/components"
-import { Row } from "@/models"
+import { Row } from "@/types"
 import { useState, useRef } from "react"
 import useClickAway from "@/hooks/useClickAway"
 import "../styles/components/_menu.scss"

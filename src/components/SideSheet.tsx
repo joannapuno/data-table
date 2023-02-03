@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react"
-import { Row } from "@/models"
+import { Row } from "@/types"
 import "@/styles/components/_side-sheet.scss"
 
 type Props = {

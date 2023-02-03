@@ -1,6 +1,6 @@
 import React,{ useReducer, useState } from "react"
 import { Menu, Thumbnail, SideSheet } from "@/components"
-import { Row, Column } from "@/models"
+import { Row, Column } from "@/types"
 import "../styles/components/table.scss"
 
 type Props = {
