@@ -43,9 +43,6 @@ export default function tableReducer(state = tableRows, action: Action) {
 	switch (action.type) {
 	case ADD_CHARA: {
 		const { id, charac } = action.payload
-
-		console.log(charac)
-		
 		return [
 			...state,
 			{
