@@ -1,13 +1,15 @@
-import React from "react"
+import { ADD_CHARA } from "@/actions/actionTypes"
+import { Row, Column } from "@/types"
+import { Action } from "redux"
 
-const DatatableContext = React.createContext([
+const tableRows: Row[] = [
 	{
 		character: "Xiao",
 		element: "Anemo",
 		role: "DPS",
 		level: 90,
 		weapon: "Primordial Jade Winged-Spear",
-		artifactSet: ["Viridescent + Gladiator"],
+		artifactSet: "Viridescent + Gladiator",
 		notes: "Glass cannon"
 	},
 	{
@@ -16,7 +18,7 @@ const DatatableContext = React.createContext([
 		role: "Healer",
 		level: 90,
 		weapon: "Favonious Sword",
-		artifactSet: ["Viridescent + Gladiator"],
+		artifactSet: "Viridescent + Gladiator",
 		notes: "Battery for Xiao plus a great healer"
 	}, {
 		character: "Albedo",
@@ -24,7 +26,7 @@ const DatatableContext = React.createContext([
 		role: "Support",
 		level: 90,
 		weapon: "Cinnabar Spindle",
-		artifactSet: ["Opulent"], // TODO: make artifact type
+		artifactSet: "Opulent",
 		notes: "Extra DMG and bonus shield with elemental reactions"
 	}, {
 		character: "Fischl",
@@ -32,9 +34,27 @@ const DatatableContext = React.createContext([
 		role: "Support",
 		level: 90,
 		weapon: "Favonious Bow",
-		artifactSet: ["Shimenawa + Thunder"],
+		artifactSet: "Shimenawa + Thunder",
 		notes: "Extra energy, extra DMG and reactions"
 	},
-])
+]
 
-export default DatatableContext
+export default function tableReducer(state = tableRows, action: Action) {
+	switch (action.type) {
+	case ADD_CHARA: {
+		const { id, charac } = action.payload
+
+		console.log(charac)
+		
+		return [
+			...state,
+			{
+				id: id,
+				...charac
+			}
+		]
+	}
+	default:
+		return state
+	}
+}

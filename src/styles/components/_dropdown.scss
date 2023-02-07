@@ -41,6 +41,8 @@
 
     &__list {
         width: 100%;
+        max-height: 50vh;
+        overflow-y: auto;
         position: absolute;
         background-color: $white;
         outline: $border-setup;
@@ -49,6 +51,7 @@
         @include set-padding(24, 'y');
         border-radius: 0 0 5px 5px;
         box-shadow: 5px 19px 45px #3d405b29;
+        z-index: 1;
     }
 
     &__list-content {

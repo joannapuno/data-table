@@ -5,6 +5,6 @@ export type Row = {
     role?: string
     level?: number | null
     weapon?: string
-    artifactSet?: string[]
+    artifactSet?: string
     notes?: string
 }

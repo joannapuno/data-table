@@ -16,8 +16,9 @@ export default function Input(props: Props) {
 	return (
 		<div className={classnames("sd-input", `sd-input--${defaultProps.type}`)}>
 			<input
-				id={`${defaultProps.id}-input`}
-				type="text"
+				id={defaultProps.id}
+				name={defaultProps.id}
+				type={defaultProps.type}
 				className="sd-input__field"
 				placeholder={defaultProps.label}
 			/>

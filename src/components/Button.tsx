@@ -13,6 +13,7 @@ type Props = {
     icon?: string
     title?: string
     styleName?: string
+	type?: "button" | "submit" | "reset"
     handleClick?: () => void
 }
 
@@ -43,6 +44,7 @@ export default function Button(props: Props) {
 			onClick={props.handleClick}
 			className={btnClasses} 
 			role="button"
+			type={props.type}
 			title={props.title}>
 			{ btnChildren() }
 		</button>

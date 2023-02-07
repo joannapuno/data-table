@@ -6,14 +6,16 @@ import classNames from "classnames"
 import "@/styles/components/_dropdown.scss"
 
 type Props = {
+	id: string
     options: DropdownOption[]
     label?: string
     value?: string | number
-    onOptionSelect: (optionVal: string | number) => void
+    onOptionSelect?: (optionVal: string | number) => void
 }
 
 export default function Dropdown(props: Props) {
-	const [dropdownValue, setDropdownValue] = useState(props.value)
+	const defaultProps = { ...props, value: ""}
+	const [dropdownValue, setDropdownValue] = useState(defaultProps.value)
 	const [dropdownOpen, setDropdownOpen] = useState(false)
 	const dropdownRef = useRef<HTMLDivElement | null>(null)
 	useClickAway(dropdownRef, () => setDropdownOpen(false))
@@ -32,11 +34,13 @@ export default function Dropdown(props: Props) {
 		setDropdownOpen(!dropdownOpen)
 	}
 
-	const handleOptionClick = (evt: React.MouseEvent,selectedOptionValue: string | number) => {
+	const handleOptionClick = (evt: React.MouseEvent,selectedOptionValue: string) => {
 		evt.preventDefault()
-		props.onOptionSelect(selectedOptionValue)
 		setDropdownValue(selectedOptionValue)
 		setDropdownOpen(false)
+
+		if(props.onOptionSelect)
+			props.onOptionSelect(selectedOptionValue)
 	}
 
 	const dropdownOptions = props.options.map((option, index) => {
@@ -80,6 +84,7 @@ export default function Dropdown(props: Props) {
 		<div ref={dropdownRef} className={classNames("sd-dropdown", dropdownOpen ? "sd-dropdown--open" : "")}>
 
 			<button role="button" className="sd-dropdown__selector" onClick={(evt) => openDropdown(evt)}>
+				<input type="hidden" value={dropdownValue} id={props.id} name={props.id} />
 				<p className="sd-dropdown__label">{labelDisplay ? labelDisplay : "Select Option"}</p>
 				<Icon
 					ariaLabel="Open Dropdown"

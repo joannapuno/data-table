@@ -1,4 +1,5 @@
 import { Modal, AddNewRowForm } from "@/components"
+import { useState } from "react"
 
 type Props = {
     open: boolean
@@ -6,9 +7,15 @@ type Props = {
     onSubmit: () => void
 }
 export default function AddNewModal(props: Props) {
+	const [ isOpen, setIsOpen ] = useState(props.open)
+
+	const handleOnSubmit = () => {
+		props.onSubmit()
+		setIsOpen(false)
+	}
 	return (
-		<Modal open={props.open} onClose={(evt) => props.onClose(evt)}>
-			<AddNewRowForm id="add-new-row" onSubmit={() => props.onSubmit()} />
+		<Modal open={isOpen} onClose={(evt) => props.onClose(evt)}>
+			<AddNewRowForm id="add-new-row" onSubmit={() => handleOnSubmit()} />
 		</Modal>
 	)
 }

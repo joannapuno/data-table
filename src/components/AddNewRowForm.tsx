@@ -1,9 +1,8 @@
-import { useState } from "react"
-import { DropdownOption, Character } from "@/types"
-import { Dropdown } from "@/components"
+import { FormEvent } from "react"
+import { DropdownOption  } from "@/types"
+import { Dropdown, Button, Input } from "@/components"
 import "@/styles/components/_form.scss"
-import classNames from "classnames"
-import useTableData from "@/hooks/useTableData"
+import { useDispatch } from "react-redux"
 import useDropdownData from "@/hooks/useDropdownData"
 
 type Props = {
@@ -12,21 +11,10 @@ type Props = {
 }
 
 export default function AddNewRowForm(props: Props) {
-	const tableData = useTableData()
-	const charactersList = useDropdownData()
-	const [ allCharas ] = useState(charactersList.allCharactersList)
+	const { allCharactersList } = useDropdownData()
+	const dispatch = useDispatch()
 
-	const mappedCharacters = () => {
-		const list: Character[] = []
-		allCharas.map(charac => {
-			const found = tableData.tableRows.find(row => row.character === charac.name)
-			if(!found) list.push(charac)
-		})
-		return list
-	}
-
-	const availableCharacs = mappedCharacters()
-	const characterOptions: DropdownOption[] = availableCharacs.map((row): DropdownOption => {
+	const characterOptions: DropdownOption[] = allCharactersList.map((row): DropdownOption => {
 		return {
 			label: row.name as string,
 			subLabel: row.element as string,
@@ -34,19 +22,52 @@ export default function AddNewRowForm(props: Props) {
 		}
 	})
 
-	const handleSubmit = (evt: SubmitEvent) => {
-		console.log("this is being submitted")
+	const handleSubmit = (evt: FormEvent) => {
 		evt.preventDefault()
-		props.onSubmit()
-	}
 
-	const handleCharacterSelect = (val: string | number) => {
-		console.log(val)
+		const form: HTMLFormElement = evt.target
+		const formData = new FormData(form)
+
+		const formJson = Object.fromEntries(formData.entries())
+
+
+		dispatch({
+			type: "ADD_CHARA",
+			payload: {
+				charac: {
+					character: formJson["character-name"],
+					role: formJson["character-role"],
+					level: formJson["character-level"],
+					notes: formJson["character-notes"],
+				}
+			}
+		})
+
+		props.onSubmit()
+		
 	}
 
 	return (
-		<form className="sd-form" id={props.id} onSubmit={() => handleSubmit}>
-			<Dropdown label="Select Character" options={characterOptions} onOptionSelect={handleCharacterSelect} />
+		<form className="sd-form add-new-form" id={props.id} onSubmit={(evt: FormEvent) => handleSubmit(evt)}>
+			<Dropdown 
+				id="character-name" 
+				label="Select Character" 
+				options={characterOptions} />
+
+			<Input 
+				label="Role" 
+				id="character-role" />
+
+			<Input 
+				label="Level"
+				type="number" 
+				id="character-level" />
+
+			<Input 
+				label="Notes" 
+				id="character-notes" />
+
+			<Button text="Add" ariaLabel="Add Character" type="submit" />
 		</form>
 	)
 }
