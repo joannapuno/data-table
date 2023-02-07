@@ -1,0 +1,11 @@
+@use '../shared/variables' as *;
+@use '../shared/mixins' as *;
+@use '../shared/utils' as *;
+
+.sd-form {
+    &.add-new-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

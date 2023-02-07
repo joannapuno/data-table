@@ -15,7 +15,7 @@
     visibility: visible;
     background-color: #FFF;
     z-index: 1;
-    transition: 0.2s ease-in;
+    transition: 0.2s ease;
   }
 
   #{$parent}__header {
@@ -65,7 +65,6 @@
     #{$parent}__content {
       -webkit-transform: translateX(0);
       transform: translateX(0);
-      transition: 0.2s ease-in;
     }
 
     &:after {

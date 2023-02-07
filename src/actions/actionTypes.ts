@@ -1,0 +1,1 @@
+export const ADD_CHARA = "ADD_CHARA"
