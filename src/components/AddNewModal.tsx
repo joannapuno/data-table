@@ -14,7 +14,7 @@ export default function AddNewModal(props: Props) {
 		setIsOpen(false)
 	}
 	return (
-		<Modal open={isOpen} onClose={(evt) => props.onClose(evt)}>
+		<Modal open={props.open} onClose={(evt) => props.onClose(evt)}>
 			<AddNewRowForm id="add-new-row" onSubmit={() => handleOnSubmit()} />
 		</Modal>
 	)

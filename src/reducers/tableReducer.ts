@@ -39,10 +39,10 @@ const tableRows: Row[] = [
 	},
 ]
 
-export default function tableReducer(state = tableRows, action: Action) {
+export default function tableReducer(state = tableRows, action: any) {
 	switch (action.type) {
 	case ADD_CHARA: {
-		const { id, charac } = action.payload
+		const { id, charac } = action.payload 
 		return [
 			...state,
 			{

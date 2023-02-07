@@ -1,4 +1,4 @@
-import { FormEvent } from "react"
+import React, { FormEvent } from "react"
 import { DropdownOption  } from "@/types"
 import { Dropdown, Button, Input } from "@/components"
 import "@/styles/components/_form.scss"
@@ -22,10 +22,10 @@ export default function AddNewRowForm(props: Props) {
 		}
 	})
 
-	const handleSubmit = (evt: FormEvent) => {
+	const handleSubmit = (evt: React.FormEvent) => {
 		evt.preventDefault()
 
-		const form: HTMLFormElement = evt.target
+		const form = evt.currentTarget as HTMLFormElement
 		const formData = new FormData(form)
 
 		const formJson = Object.fromEntries(formData.entries())
@@ -48,7 +48,7 @@ export default function AddNewRowForm(props: Props) {
 	}
 
 	return (
-		<form className="sd-form add-new-form" id={props.id} onSubmit={(evt: FormEvent) => handleSubmit(evt)}>
+		<form className="sd-form add-new-form" id={props.id} onSubmit={(evt: React.FormEvent) => handleSubmit(evt)}>
 			<Dropdown 
 				id="character-name" 
 				label="Select Character" 
