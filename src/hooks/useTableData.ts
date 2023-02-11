@@ -1,10 +1,8 @@
-import { ADD_CHARA } from "@/actions/actionTypes"
-import { Row, Column } from "@/types"
-import React from "react"
-import { useSelector } from "react-redux"
-import { Action } from "redux"
+import { Column } from "@/types"
+import { useSelector, useDispatch } from "react-redux"
 
 export default function useTableData() {
+	const dispatch = useDispatch()
 	const hiddenColumns = ["id", "element", "weapon", "artifactSet"]
 	const tableRows = useSelector((state: any) => state.table)
 	const colKeys = Object.keys(Object.assign({}, ...tableRows))
@@ -16,9 +14,35 @@ export default function useTableData() {
 		}
 	})
 
+	const handleRowDelete = (id: number) => {
+		dispatch({
+			type: "REMOVE_CHARA",
+			payload: {
+				id: id
+			}
+		})
+	}
+
+	const handleAddNew = (formData: FormData) => {
+		const formJson = Object.fromEntries(formData.entries())
+		dispatch({
+			type: "ADD_CHARA",
+			payload: {
+				charac: {
+					character: formJson["character-name"],
+					role: formJson["character-role"],
+					level: formJson["character-level"],
+					notes: formJson["character-notes"],
+				}
+			}
+		})
+	}
+
 	return {
 		tableRows,
 		tableColumns,
 		hiddenColumns,
+		handleRowDelete,
+		handleAddNew
 	}
 }

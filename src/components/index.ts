@@ -9,6 +9,7 @@ export { default as Thumbnail } from "./Thumbnail"
 export { default as AddNewRowForm } from "./AddNewRowForm"
 export { default as AddNewModal } from "./AddNewModal"
 export { default as Dropdown } from "./Dropdown"
+export { default as EmptyTable } from "./EmptyTable"
 
 // LAYOUT
 export { default as TitleBar } from "./TitleBar"

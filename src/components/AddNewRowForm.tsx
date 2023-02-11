@@ -1,9 +1,9 @@
-import React, { FormEvent } from "react"
+import React from "react"
 import { DropdownOption  } from "@/types"
 import { Dropdown, Button, Input } from "@/components"
 import "@/styles/components/_form.scss"
-import { useDispatch } from "react-redux"
 import useDropdownData from "@/hooks/useDropdownData"
+import useTableData from "@/hooks/useTableData"
 
 type Props = {
 	id: string
@@ -12,7 +12,7 @@ type Props = {
 
 export default function AddNewRowForm(props: Props) {
 	const { allCharactersList } = useDropdownData()
-	const dispatch = useDispatch()
+	const { handleAddNew } = useTableData()
 
 	const characterOptions: DropdownOption[] = allCharactersList.map((row): DropdownOption => {
 		return {
@@ -24,27 +24,10 @@ export default function AddNewRowForm(props: Props) {
 
 	const handleSubmit = (evt: React.FormEvent) => {
 		evt.preventDefault()
-
 		const form = evt.currentTarget as HTMLFormElement
 		const formData = new FormData(form)
-
-		const formJson = Object.fromEntries(formData.entries())
-
-
-		dispatch({
-			type: "ADD_CHARA",
-			payload: {
-				charac: {
-					character: formJson["character-name"],
-					role: formJson["character-role"],
-					level: formJson["character-level"],
-					notes: formJson["character-notes"],
-				}
-			}
-		})
-
+		handleAddNew(formData)
 		props.onSubmit()
-		
 	}
 
 	return (

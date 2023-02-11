@@ -83,7 +83,7 @@ $input-themes: (
 		appearance: none;
 
 		&:placeholder-shown+label {
-			top: 1.75rem;
+			top: 1.50rem;
 			transform: translateY(-50%);
 			font-size: 12px;
 		}
